@@ -1,0 +1,28 @@
+{
+  "name": "css-shapes-object",
+  "version": "0.0.1",
+  "description": "draw some simple shapes by using css",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoveKino/css-shapes-object.git"
+  },
+  "keywords": [
+    "shape",
+    "css",
+    "draw"
+  ],
+  "author": "ddchen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LoveKino/css-shapes-object/issues"
+  },
+  "homepage": "https://github.com/LoveKino/css-shapes-object#readme",
+  "devDependencies": {
+    "kabanery": "^0.1.2",
+    "webpack": "^1.14.0"
+  }
+}
