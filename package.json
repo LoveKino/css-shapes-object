@@ -1,6 +1,6 @@
 {
   "name": "css-shapes-object",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "draw some simple shapes by using css",
   "main": "index.js",
   "scripts": {
@@ -24,5 +24,8 @@
   "devDependencies": {
     "kabanery": "^0.1.2",
     "webpack": "^1.14.0"
+  },
+  "dependencies": {
+    "kabanery": "^0.1.2"
   }
 }
