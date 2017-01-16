@@ -1,6 +1,6 @@
 {
   "name": "css-shapes-object",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "draw some simple shapes by using css",
   "main": "index.js",
   "scripts": {
