@@ -46,34 +46,49 @@
 
 	'use strict';
 
-	let line = __webpack_require__(1);
+	let angle = __webpack_require__(1);
 
-	document.body.appendChild(line({
+	let {
+	    n
+	} = __webpack_require__(3);
+
+	document.body.appendChild(angle());
+
+	document.body.appendChild(n('br'));
+
+	document.body.appendChild(angle({
 	    color: 'black',
-	    bold: 3,
+	    bold: 4,
 	    length: 20
 	}));
 
-	document.body.appendChild(line({
-	    color: 'red',
-	    bold: 3,
-	    length: 20,
-	    direction: 'horizontal'
-	}));
+	document.body.appendChild(n('br'));
 
-	document.body.appendChild(line({
+	document.body.appendChild(angle({
 	    color: 'black',
-	    bold: 3,
+	    bold: 1,
 	    length: 20,
-	    angle: 40
+	    direction: 'left'
 	}));
 
-	document.body.appendChild(line({
+	document.body.appendChild(n('br'));
+
+	document.body.appendChild(angle({
+	    direction: 'right'
+	}));
+
+	document.body.appendChild(n('br'));
+
+	document.body.appendChild(angle({
 	    color: 'red',
-	    bold: 3,
-	    length: 20,
-	    direction: 'horizontal',
-	    angle: 40
+	    direction: 'top'
+	}));
+
+	document.body.appendChild(n('br'));
+
+	document.body.appendChild(angle({
+	    direction: 'bottom',
+	    length: 5
 	}));
 
 
@@ -83,9 +98,61 @@
 
 	'use strict';
 
+	let line = __webpack_require__(2);
 	let {
 	    n
-	} = __webpack_require__(2);
+	} = __webpack_require__(3);
+
+	module.exports = ({
+	    length = 10, bold = 1, color = 'black', angle = 0, direction
+	} = {}) => {
+	    if (direction === 'left') {
+	        angle = 45;
+	    } else if (direction === 'top') {
+	        angle = 135;
+	    } else if (direction === 'right') {
+	        angle = 225;
+	    } else if (direction === 'bottom') {
+	        angle = 315;
+	    }
+	    return n('div', {
+	        style: {
+	            display: 'inline-block',
+	            transform: `rotate(${angle}deg)`
+	        }
+	    }, [
+	        line({
+	            color,
+	            bold,
+	            length
+	        }),
+
+	        n('div', {
+	            style: {
+	                marginLeft: length / 2 - bold / 2,
+	                marginTop: -1 * length / 2 - bold / 2
+	            }
+	        }, [
+	            line({
+	                color,
+	                bold,
+	                length,
+	                angle: 90
+	            })
+	        ])
+	    ]);
+	};
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	let {
+	    n
+	} = __webpack_require__(3);
 
 	module.exports = ({
 	    color = 'black', bold = 3, length = 20, direction = 'vertical', angle = 0
@@ -110,27 +177,27 @@
 
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(3);
+	module.exports = __webpack_require__(4);
 
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	let {
 	    n, svgn, bindPlugs
-	} = __webpack_require__(4);
+	} = __webpack_require__(5);
 
-	let plugs = __webpack_require__(14);
+	let plugs = __webpack_require__(15);
 
-	let view = __webpack_require__(18);
+	let view = __webpack_require__(19);
 
-	let mount = __webpack_require__(24);
+	let mount = __webpack_require__(25);
 
 	module.exports = {
 	    n,
@@ -143,18 +210,18 @@
 
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	let {
 	    createElement, createSvgElement, parseArgs, nodeGener
-	} = __webpack_require__(5);
+	} = __webpack_require__(6);
 
 	let {
 	    bindEvents
-	} = __webpack_require__(12);
+	} = __webpack_require__(13);
 
 	// TODO general proxy n way
 
@@ -226,23 +293,23 @@
 
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(6);
+	module.exports = __webpack_require__(7);
 
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	let {
 	    isString, isObject, isNode, likeArray, isNumber, isBool
-	} = __webpack_require__(7);
+	} = __webpack_require__(8);
 
-	let parseAttribute = __webpack_require__(8);
+	let parseAttribute = __webpack_require__(9);
 
 	const svgNS = 'http://www.w3.org/2000/svg';
 
@@ -368,7 +435,7 @@
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -593,18 +660,18 @@
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	let {
 	    isString, isObject
-	} = __webpack_require__(7);
+	} = __webpack_require__(8);
 
 	let {
 	    mergeMap
-	} = __webpack_require__(9);
+	} = __webpack_require__(10);
 
 	const ITEM_REG = /([\w-]+)\s*=\s*(([\w-]+)|('.*?')|(".*?"))/;
 
@@ -704,20 +771,20 @@
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	let {
 	    isObject, funType, or, isString, isFalsy, likeArray
-	} = __webpack_require__(7);
+	} = __webpack_require__(8);
 
-	let iterate = __webpack_require__(10);
+	let iterate = __webpack_require__(11);
 
 	let {
 	    map, reduce, find, findIndex, forEach, filter, any, exist, compact
-	} = __webpack_require__(11);
+	} = __webpack_require__(12);
 
 	let contain = (list, item, fopts) => findIndex(list, item, fopts) !== -1;
 
@@ -813,14 +880,14 @@
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	let {
 	    likeArray, isObject, funType, isFunction, isUndefined, or, isNumber, isFalsy, mapType
-	} = __webpack_require__(7);
+	} = __webpack_require__(8);
 
 	/**
 	 *
@@ -919,12 +986,12 @@
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	let iterate = __webpack_require__(10);
+	let iterate = __webpack_require__(11);
 
 	let defauls = {
 	    eq: (v1, v2) => v1 === v2
@@ -1023,12 +1090,12 @@
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	let EventMatrix = __webpack_require__(13);
+	let EventMatrix = __webpack_require__(14);
 
 	let {
 	    addHandler,
@@ -1071,14 +1138,14 @@
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	let {
 	    findIndex, contain, map, forEach
-	} = __webpack_require__(9);
+	} = __webpack_require__(10);
 
 	module.exports = () => {
 	    let matrix = {};
@@ -1247,13 +1314,13 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	let twowaybinding = __webpack_require__(15);
-	let eventError = __webpack_require__(17);
+	let twowaybinding = __webpack_require__(16);
+	let eventError = __webpack_require__(18);
 
 	module.exports = {
 	    twowaybinding,
@@ -1262,14 +1329,14 @@
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	let {
 	    get, set
-	} = __webpack_require__(16);
+	} = __webpack_require__(17);
 
 	module.exports = (obj, path) => (tagName, attributes, childExp) => {
 	    let value = get(obj, path, '');
@@ -1288,17 +1355,17 @@
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	let {
 	    reduce
-	} = __webpack_require__(9);
+	} = __webpack_require__(10);
 	let {
 	    funType, isObject, or, isString, isFalsy
-	} = __webpack_require__(7);
+	} = __webpack_require__(8);
 
 	let defineProperty = (obj, key, opts) => {
 	    if (Object.defineProperty) {
@@ -1443,7 +1510,7 @@
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1474,24 +1541,24 @@
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	let {
 	    set
-	} = __webpack_require__(16);
+	} = __webpack_require__(17);
 
 	let {
 	    isObject, isFunction, likeArray
-	} = __webpack_require__(7);
+	} = __webpack_require__(8);
 
 	let {
 	    forEach
-	} = __webpack_require__(9);
+	} = __webpack_require__(10);
 
-	let replace = __webpack_require__(19);
+	let replace = __webpack_require__(20);
 
 	/**
 	 * render function: (data) => node
@@ -1679,28 +1746,28 @@
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	let {
 	    moveNodeEvent, clearBelow
-	} = __webpack_require__(12);
+	} = __webpack_require__(13);
 
 	let {
 	    toArray
-	} = __webpack_require__(16);
+	} = __webpack_require__(17);
 
 	let {
 	    isNode
-	} = __webpack_require__(7);
+	} = __webpack_require__(8);
 
 	let {
 	    forEach
-	} = __webpack_require__(9);
+	} = __webpack_require__(10);
 
-	let applyAttibutes = __webpack_require__(20);
+	let applyAttibutes = __webpack_require__(21);
 
 	let replaceDirectly = (node, newNode) => {
 	    let parent = node.parentNode;
@@ -1812,22 +1879,22 @@
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	let {
 	    getAttributeMap
-	} = __webpack_require__(21);
+	} = __webpack_require__(22);
 
 	let {
 	    hasOwnProperty
-	} = __webpack_require__(16);
+	} = __webpack_require__(17);
 
 	let {
 	    forEach
-	} = __webpack_require__(9);
+	} = __webpack_require__(10);
 
 	let applyAttibutes = (node, newNode) => {
 	    // attributes
@@ -1858,14 +1925,14 @@
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	let shadowFrame = __webpack_require__(22);
+	let shadowFrame = __webpack_require__(23);
 
-	let startMomenter = __webpack_require__(23);
+	let startMomenter = __webpack_require__(24);
 
 	let getX = (elem) => {
 	    var x = 0;
@@ -1948,7 +2015,7 @@
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2002,7 +2069,7 @@
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2057,22 +2124,22 @@
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	let {
 	    attachDocument
-	} = __webpack_require__(12);
+	} = __webpack_require__(13);
 
 	let {
 	    isNode
-	} = __webpack_require__(7);
+	} = __webpack_require__(8);
 
 	let {
 	    flat, forEach
-	} = __webpack_require__(9);
+	} = __webpack_require__(10);
 
 	module.exports = (rootNode, parentNode) => {
 	    rootNode = flat(rootNode);
